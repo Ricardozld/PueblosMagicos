@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sistemarecomendacionModelStoreContainer" CdmEntityContainer="sistemarecomendacionEntities">
+    <EntitySetMapping Name="atractivo">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.atractivo">
+        <MappingFragment StoreEntitySet="atractivo">
+          <ScalarProperty Name="id_Atractivo" ColumnName="id_Atractivo" />
+          <ScalarProperty Name="id_Pueblo_magico" ColumnName="id_Pueblo_magico" />
+          <ScalarProperty Name="id_Tipo_atractivo" ColumnName="id_Tipo_atractivo" />
+          <ScalarProperty Name="latitud" ColumnName="latitud" />
+          <ScalarProperty Name="longitud" ColumnName="longitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="atractivo_has_criterios_evaluacion">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.atractivo_has_criterios_evaluacion">
+        <MappingFragment StoreEntitySet="atractivo_has_criterios_evaluacion">
+          <ScalarProperty Name="id_Atractivo" ColumnName="id_Atractivo" />
+          <ScalarProperty Name="id_Criterios_evaluacion" ColumnName="id_Criterios_evaluacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="calificacion">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.calificacion">
+        <MappingFragment StoreEntitySet="calificacion">
+          <ScalarProperty Name="id_Calificacion" ColumnName="id_Calificacion" />
+          <ScalarProperty Name="id_Atractivo" ColumnName="id_Atractivo" />
+          <ScalarProperty Name="id_Criterios_evaluacion" ColumnName="id_Criterios_evaluacion" />
+          <ScalarProperty Name="id_Pueblo_magico" ColumnName="id_Pueblo_magico" />
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="calificacion1" ColumnName="calificacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categoria">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.categoria">
+        <MappingFragment StoreEntitySet="categoria">
+          <ScalarProperty Name="id_Categoria" ColumnName="id_Categoria" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="criterios_evaluacion">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.criterios_evaluacion">
+        <MappingFragment StoreEntitySet="criterios_evaluacion">
+          <ScalarProperty Name="id_Criterios_evaluacion" ColumnName="id_Criterios_evaluacion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="entidad_federativa">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.entidad_federativa">
+        <MappingFragment StoreEntitySet="entidad_federativa">
+          <ScalarProperty Name="id_Entidad_federativa" ColumnName="id_Entidad_federativa" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="historial_visitas">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.historial_visitas">
+        <MappingFragment StoreEntitySet="historial_visitas">
+          <ScalarProperty Name="id_Pueblo_magico" ColumnName="id_Pueblo_magico" />
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="primedio_visita" ColumnName="primedio_visita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pueblo_magico">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.pueblo_magico">
+        <MappingFragment StoreEntitySet="pueblo_magico">
+          <ScalarProperty Name="id_Pueblo_magico" ColumnName="id_Pueblo_magico" />
+          <ScalarProperty Name="id_Entidad_federativa" ColumnName="id_Entidad_federativa" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="latitud" ColumnName="latitud" />
+          <ScalarProperty Name="longitud" ColumnName="longitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_atractivo">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.tipo_atractivo">
+        <MappingFragment StoreEntitySet="tipo_atractivo">
+          <ScalarProperty Name="id_Tipo_atractivo" ColumnName="id_Tipo_atractivo" />
+          <ScalarProperty Name="id_Categoria" ColumnName="id_Categoria" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="sistemarecomendacionModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="ap_paterno" ColumnName="ap_paterno" />
+          <ScalarProperty Name="ap_materno" ColumnName="ap_materno" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="preferencias_usuario" TypeName="sistemarecomendacionModel.preferencias_usuario" StoreEntitySet="preferencias_usuario">
+      <EndProperty Name="tipo_atractivo">
+        <ScalarProperty Name="id_Tipo_atractivo" ColumnName="id_Tipo_atractivo" />
+      </EndProperty>
+      <EndProperty Name="usuario">
+        <ScalarProperty Name="id_Usuario" ColumnName="id_Usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

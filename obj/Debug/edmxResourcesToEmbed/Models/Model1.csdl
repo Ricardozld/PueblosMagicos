@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sistemarecomendacionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="atractivo">
+    <Key>
+      <PropertyRef Name="id_Atractivo" />
+    </Key>
+    <Property Name="id_Atractivo" Type="Int32" Nullable="false" />
+    <Property Name="id_Pueblo_magico" Type="Int32" Nullable="false" />
+    <Property Name="id_Tipo_atractivo" Type="Int32" Nullable="false" />
+    <Property Name="latitud" Type="Double" Nullable="false" />
+    <Property Name="longitud" Type="Double" Nullable="false" />
+    <NavigationProperty Name="atractivo_has_criterios_evaluacion" Relationship="Self.fk_Atractivo_has_Criterios_evaluacion_Atractivo1" FromRole="atractivo" ToRole="atractivo_has_criterios_evaluacion" />
+    <NavigationProperty Name="pueblo_magico" Relationship="Self.fk_Atractivo_Pueblo_magico1" FromRole="atractivo" ToRole="pueblo_magico" />
+    <NavigationProperty Name="tipo_atractivo" Relationship="Self.fk_Atractivo_Tipo_atractivo1" FromRole="atractivo" ToRole="tipo_atractivo" />
+  </EntityType>
+  <EntityType Name="atractivo_has_criterios_evaluacion">
+    <Key>
+      <PropertyRef Name="id_Atractivo" />
+      <PropertyRef Name="id_Criterios_evaluacion" />
+    </Key>
+    <Property Name="id_Atractivo" Type="Int32" Nullable="false" />
+    <Property Name="id_Criterios_evaluacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="atractivo" Relationship="Self.fk_Atractivo_has_Criterios_evaluacion_Atractivo1" FromRole="atractivo_has_criterios_evaluacion" ToRole="atractivo" />
+    <NavigationProperty Name="criterios_evaluacion" Relationship="Self.fk_Atractivo_has_Criterios_evaluacion_Criterios_evaluacion1" FromRole="atractivo_has_criterios_evaluacion" ToRole="criterios_evaluacion" />
+    <NavigationProperty Name="calificacion" Relationship="Self.fk_Calificacion_Atractivo_has_Criterios_evaluacion1" FromRole="atractivo_has_criterios_evaluacion" ToRole="calificacion" />
+  </EntityType>
+  <EntityType Name="calificacion">
+    <Key>
+      <PropertyRef Name="id_Calificacion" />
+    </Key>
+    <Property Name="id_Calificacion" Type="Int32" Nullable="false" />
+    <Property Name="id_Atractivo" Type="Int32" Nullable="false" />
+    <Property Name="id_Criterios_evaluacion" Type="Int32" Nullable="false" />
+    <Property Name="id_Pueblo_magico" Type="Int32" Nullable="false" />
+    <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+    <Property Name="calificacion1" Type="Double" Nullable="false" />
+    <NavigationProperty Name="atractivo_has_criterios_evaluacion" Relationship="Self.fk_Calificacion_Atractivo_has_Criterios_evaluacion1" FromRole="calificacion" ToRole="atractivo_has_criterios_evaluacion" />
+    <NavigationProperty Name="historial_visitas" Relationship="Self.fk_Calificacion_Historial_visitas1" FromRole="calificacion" ToRole="historial_visitas" />
+  </EntityType>
+  <EntityType Name="categoria">
+    <Key>
+      <PropertyRef Name="id_Categoria" />
+    </Key>
+    <Property Name="id_Categoria" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tipo_atractivo" Relationship="Self.fk_Tipo_atractivo_Categoria1" FromRole="categoria" ToRole="tipo_atractivo" />
+  </EntityType>
+  <EntityType Name="criterios_evaluacion">
+    <Key>
+      <PropertyRef Name="id_Criterios_evaluacion" />
+    </Key>
+    <Property Name="id_Criterios_evaluacion" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="atractivo_has_criterios_evaluacion" Relationship="Self.fk_Atractivo_has_Criterios_evaluacion_Criterios_evaluacion1" FromRole="criterios_evaluacion" ToRole="atractivo_has_criterios_evaluacion" />
+  </EntityType>
+  <EntityType Name="entidad_federativa">
+    <Key>
+      <PropertyRef Name="id_Entidad_federativa" />
+    </Key>
+    <Property Name="id_Entidad_federativa" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="pueblo_magico" Relationship="Self.fk_Pueblo_magico_Entidad_federativa" FromRole="entidad_federativa" ToRole="pueblo_magico" />
+  </EntityType>
+  <EntityType Name="historial_visitas">
+    <Key>
+      <PropertyRef Name="id_Pueblo_magico" />
+      <PropertyRef Name="id_Usuario" />
+      <PropertyRef Name="fecha_inicio" />
+    </Key>
+    <Property Name="id_Pueblo_magico" Type="Int32" Nullable="false" />
+    <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+    <Property Name="fecha_fin" Type="DateTime" Nullable="false" />
+    <Property Name="primedio_visita" Type="Double" Nullable="false" />
+    <NavigationProperty Name="calificacion" Relationship="Self.fk_Calificacion_Historial_visitas1" FromRole="historial_visitas" ToRole="calificacion" />
+    <NavigationProperty Name="pueblo_magico" Relationship="Self.fk_Pueblo_magico_has_Usuario_Pueblo_magico1" FromRole="historial_visitas" ToRole="pueblo_magico" />
+    <NavigationProperty Name="usuario" Relationship="Self.fk_Pueblo_magico_has_Usuario_Usuario1" FromRole="historial_visitas" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="pueblo_magico">
+    <Key>
+      <PropertyRef Name="id_Pueblo_magico" />
+    </Key>
+    <Property Name="id_Pueblo_magico" Type="Int32" Nullable="false" />
+    <Property Name="id_Entidad_federativa" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="latitud" Type="Double" Nullable="false" />
+    <Property Name="longitud" Type="Double" Nullable="false" />
+    <NavigationProperty Name="atractivo" Relationship="Self.fk_Atractivo_Pueblo_magico1" FromRole="pueblo_magico" ToRole="atractivo" />
+    <NavigationProperty Name="entidad_federativa" Relationship="Self.fk_Pueblo_magico_Entidad_federativa" FromRole="pueblo_magico" ToRole="entidad_federativa" />
+    <NavigationProperty Name="historial_visitas" Relationship="Self.fk_Pueblo_magico_has_Usuario_Pueblo_magico1" FromRole="pueblo_magico" ToRole="historial_visitas" />
+  </EntityType>
+  <EntityType Name="tipo_atractivo">
+    <Key>
+      <PropertyRef Name="id_Tipo_atractivo" />
+    </Key>
+    <Property Name="id_Tipo_atractivo" Type="Int32" Nullable="false" />
+    <Property Name="id_Categoria" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="atractivo" Relationship="Self.fk_Atractivo_Tipo_atractivo1" FromRole="tipo_atractivo" ToRole="atractivo" />
+    <NavigationProperty Name="categoria" Relationship="Self.fk_Tipo_atractivo_Categoria1" FromRole="tipo_atractivo" ToRole="categoria" />
+    <NavigationProperty Name="usuario" Relationship="Self.preferencias_usuario" FromRole="tipo_atractivo" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id_Usuario" />
+    </Key>
+    <Property Name="id_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ap_paterno" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ap_materno" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="historial_visitas" Relationship="Self.fk_Pueblo_magico_has_Usuario_Usuario1" FromRole="usuario" ToRole="historial_visitas" />
+    <NavigationProperty Name="tipo_atractivo" Relationship="Self.preferencias_usuario" FromRole="usuario" ToRole="tipo_atractivo" />
+  </EntityType>
+  <Association Name="fk_Atractivo_has_Criterios_evaluacion_Atractivo1">
+    <End Role="atractivo" Type="Self.atractivo" Multiplicity="1" />
+    <End Role="atractivo_has_criterios_evaluacion" Type="Self.atractivo_has_criterios_evaluacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="atractivo">
+        <PropertyRef Name="id_Atractivo" />
+      </Principal>
+      <Dependent Role="atractivo_has_criterios_evaluacion">
+        <PropertyRef Name="id_Atractivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Atractivo_Pueblo_magico1">
+    <End Role="pueblo_magico" Type="Self.pueblo_magico" Multiplicity="1" />
+    <End Role="atractivo" Type="Self.atractivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pueblo_magico">
+        <PropertyRef Name="id_Pueblo_magico" />
+      </Principal>
+      <Dependent Role="atractivo">
+        <PropertyRef Name="id_Pueblo_magico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Atractivo_Tipo_atractivo1">
+    <End Role="tipo_atractivo" Type="Self.tipo_atractivo" Multiplicity="1" />
+    <End Role="atractivo" Type="Self.atractivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_atractivo">
+        <PropertyRef Name="id_Tipo_atractivo" />
+      </Principal>
+      <Dependent Role="atractivo">
+        <PropertyRef Name="id_Tipo_atractivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Atractivo_has_Criterios_evaluacion_Criterios_evaluacion1">
+    <End Role="criterios_evaluacion" Type="Self.criterios_evaluacion" Multiplicity="1" />
+    <End Role="atractivo_has_criterios_evaluacion" Type="Self.atractivo_has_criterios_evaluacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="criterios_evaluacion">
+        <PropertyRef Name="id_Criterios_evaluacion" />
+      </Principal>
+      <Dependent Role="atractivo_has_criterios_evaluacion">
+        <PropertyRef Name="id_Criterios_evaluacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Calificacion_Atractivo_has_Criterios_evaluacion1">
+    <End Role="atractivo_has_criterios_evaluacion" Type="Self.atractivo_has_criterios_evaluacion" Multiplicity="1" />
+    <End Role="calificacion" Type="Self.calificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="atractivo_has_criterios_evaluacion">
+        <PropertyRef Name="id_Atractivo" />
+        <PropertyRef Name="id_Criterios_evaluacion" />
+      </Principal>
+      <Dependent Role="calificacion">
+        <PropertyRef Name="id_Atractivo" />
+        <PropertyRef Name="id_Criterios_evaluacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Calificacion_Historial_visitas1">
+    <End Role="historial_visitas" Type="Self.historial_visitas" Multiplicity="1" />
+    <End Role="calificacion" Type="Self.calificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="historial_visitas">
+        <PropertyRef Name="id_Pueblo_magico" />
+        <PropertyRef Name="id_Usuario" />
+        <PropertyRef Name="fecha_inicio" />
+      </Principal>
+      <Dependent Role="calificacion">
+        <PropertyRef Name="id_Pueblo_magico" />
+        <PropertyRef Name="id_Usuario" />
+        <PropertyRef Name="fecha_inicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Tipo_atractivo_Categoria1">
+    <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
+    <End Role="tipo_atractivo" Type="Self.tipo_atractivo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoria">
+        <PropertyRef Name="id_Categoria" />
+      </Principal>
+      <Dependent Role="tipo_atractivo">
+        <PropertyRef Name="id_Categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Pueblo_magico_Entidad_federativa">
+    <End Role="entidad_federativa" Type="Self.entidad_federativa" Multiplicity="1" />
+    <End Role="pueblo_magico" Type="Self.pueblo_magico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="entidad_federativa">
+        <PropertyRef Name="id_Entidad_federativa" />
+      </Principal>
+      <Dependent Role="pueblo_magico">
+        <PropertyRef Name="id_Entidad_federativa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Pueblo_magico_has_Usuario_Pueblo_magico1">
+    <End Role="pueblo_magico" Type="Self.pueblo_magico" Multiplicity="1" />
+    <End Role="historial_visitas" Type="Self.historial_visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pueblo_magico">
+        <PropertyRef Name="id_Pueblo_magico" />
+      </Principal>
+      <Dependent Role="historial_visitas">
+        <PropertyRef Name="id_Pueblo_magico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Pueblo_magico_has_Usuario_Usuario1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="historial_visitas" Type="Self.historial_visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_Usuario" />
+      </Principal>
+      <Dependent Role="historial_visitas">
+        <PropertyRef Name="id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="preferencias_usuario">
+    <End Role="tipo_atractivo" Type="Self.tipo_atractivo" Multiplicity="*" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="sistemarecomendacionEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="atractivo" EntityType="Self.atractivo" />
+    <EntitySet Name="atractivo_has_criterios_evaluacion" EntityType="Self.atractivo_has_criterios_evaluacion" />
+    <EntitySet Name="calificacion" EntityType="Self.calificacion" />
+    <EntitySet Name="categoria" EntityType="Self.categoria" />
+    <EntitySet Name="criterios_evaluacion" EntityType="Self.criterios_evaluacion" />
+    <EntitySet Name="entidad_federativa" EntityType="Self.entidad_federativa" />
+    <EntitySet Name="historial_visitas" EntityType="Self.historial_visitas" />
+    <EntitySet Name="pueblo_magico" EntityType="Self.pueblo_magico" />
+    <EntitySet Name="tipo_atractivo" EntityType="Self.tipo_atractivo" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="fk_Atractivo_has_Criterios_evaluacion_Atractivo1" Association="Self.fk_Atractivo_has_Criterios_evaluacion_Atractivo1">
+      <End Role="atractivo" EntitySet="atractivo" />
+      <End Role="atractivo_has_criterios_evaluacion" EntitySet="atractivo_has_criterios_evaluacion" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Atractivo_Pueblo_magico1" Association="Self.fk_Atractivo_Pueblo_magico1">
+      <End Role="pueblo_magico" EntitySet="pueblo_magico" />
+      <End Role="atractivo" EntitySet="atractivo" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Atractivo_Tipo_atractivo1" Association="Self.fk_Atractivo_Tipo_atractivo1">
+      <End Role="tipo_atractivo" EntitySet="tipo_atractivo" />
+      <End Role="atractivo" EntitySet="atractivo" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Atractivo_has_Criterios_evaluacion_Criterios_evaluacion1" Association="Self.fk_Atractivo_has_Criterios_evaluacion_Criterios_evaluacion1">
+      <End Role="criterios_evaluacion" EntitySet="criterios_evaluacion" />
+      <End Role="atractivo_has_criterios_evaluacion" EntitySet="atractivo_has_criterios_evaluacion" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Calificacion_Atractivo_has_Criterios_evaluacion1" Association="Self.fk_Calificacion_Atractivo_has_Criterios_evaluacion1">
+      <End Role="atractivo_has_criterios_evaluacion" EntitySet="atractivo_has_criterios_evaluacion" />
+      <End Role="calificacion" EntitySet="calificacion" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Calificacion_Historial_visitas1" Association="Self.fk_Calificacion_Historial_visitas1">
+      <End Role="historial_visitas" EntitySet="historial_visitas" />
+      <End Role="calificacion" EntitySet="calificacion" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Tipo_atractivo_Categoria1" Association="Self.fk_Tipo_atractivo_Categoria1">
+      <End Role="categoria" EntitySet="categoria" />
+      <End Role="tipo_atractivo" EntitySet="tipo_atractivo" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Pueblo_magico_Entidad_federativa" Association="Self.fk_Pueblo_magico_Entidad_federativa">
+      <End Role="entidad_federativa" EntitySet="entidad_federativa" />
+      <End Role="pueblo_magico" EntitySet="pueblo_magico" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Pueblo_magico_has_Usuario_Pueblo_magico1" Association="Self.fk_Pueblo_magico_has_Usuario_Pueblo_magico1">
+      <End Role="pueblo_magico" EntitySet="pueblo_magico" />
+      <End Role="historial_visitas" EntitySet="historial_visitas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Pueblo_magico_has_Usuario_Usuario1" Association="Self.fk_Pueblo_magico_has_Usuario_Usuario1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="historial_visitas" EntitySet="historial_visitas" />
+    </AssociationSet>
+    <AssociationSet Name="preferencias_usuario" Association="Self.preferencias_usuario">
+      <End Role="tipo_atractivo" EntitySet="tipo_atractivo" />
+      <End Role="usuario" EntitySet="usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
